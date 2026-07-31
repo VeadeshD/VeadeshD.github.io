@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FADEC Case Study | Veadesh Dhanasekar</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Prism CSS for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+</head>
+<body class="line-numbers">
+    <div class="bg-glow"></div>
+    <div class="bg-glow right"></div>
+
+    <nav>
+        <div class="logo">VD.</div>
+        <ul class="nav-links">
+            <li><a href="index.html">← Back to Portfolio</a></li>
+        </ul>
+    </nav>
+
+    <header class="case-study-hero">
+        <div>
+            <h1>Open-Source FADEC <br><span class="gradient-text">(FPGA Architecture)</span></h1>
+            <p style="color: var(--text-secondary); max-width: 600px; margin: 1rem auto; font-size: 1.2rem;">A deterministic, hardware-accelerated engine control system built on a Lattice iCE40 FPGA.</p>
+        </div>
+    </header>
+
+    <div class="content-body">
+        <img src="fadec_plot.jpg" alt="MATLAB Step Response Plot" class="hero-img">
+
+        <div class="split-layout">
+            <div class="split-text">
+                <h2>The Problem: Software Latency</h2>
+                <p>While working with the PURPL space program on electric propulsion, I realized that relying on a traditional software-based microcontroller to run the engine control laws introduced severe latency. In high-voltage propulsion systems, milliseconds of delay can result in catastrophic electrical faults.</p>
+                <p>I initiated a personal project to design a purely hardware-based Full Authority Digital Engine Control (FADEC) system to prove that control loops could be executed in nanoseconds without an operating system.</p>
+            </div>
+            <div class="split-visual glass-panel">
+                <div class="mermaid">
+                    graph TD
+                        ADC[MCP3208 ADC] -->|12-bit SPI| SPI[SPI Master]
+                        SPI -->|Raw Telemetry| DSP[DSP Filter]
+                        DSP -->|Filtered Data| FSM[Control Laws FSM]
+                        FSM -->|PWM Control| Valve[Proportional Valve]
+                        FSM -->|Telemetry| UART[UART Transmitter]
+                </div>
+            </div>
+        </div>
+
+        <div class="split-layout" style="flex-direction: row-reverse;">
+            <div class="split-text">
+                <h2>Hardware Digital Signal Processing (DSP)</h2>
+                <p>Because high-voltage thrusters generate massive electromagnetic interference (EMI), the raw telemetry coming from the analog sensors is incredibly noisy. If the FADEC reacted to the raw data, it would trigger false-positive emergency shutdowns.</p>
+                <p>To solve this, I designed a real-time Moving-Average Filter directly into the SystemVerilog RTL (`avg_filter.sv`). Instead of using expensive division operations that consume clock cycles, I utilized bit-shifting to divide the running sum by 8 with zero latency.</p>
+            </div>
+            <div class="split-visual glass-panel">
+<pre><code class="language-verilog">// Calculate instant average via bit-shifting
+data_o = sum_q[14:3];
+
+// Subtract oldest noise, add new telemetry, shift array
+if (valid_i == 1'b1) begin
+    sum_d = sum_q - buffer_q[7] + data_i;
+    for (int i = 7; i > 0; i--) begin
+        buffer_d[i] = buffer_q[i-1];
+    end
+    buffer_d[0] = data_i;
+    valid_o = 1'b1;
+end</code></pre>
+            </div>
+        </div>
+
+        <div class="glass-panel" style="margin-top: 4rem; text-align: center;">
+            <h2>SystemVerilog FSM Architecture</h2>
+            <p>The core logic of the FADEC is built around a complex Finite State Machine (FSM) that dictates engine states (Standby, Ignition, Steady-State, Shutdown). I engineered a custom SPI Master module in Verilog to constantly poll the external ADC chips, feeding the raw data through the DSP filter and directly into the combinational logic of the FSM.</p>
+            
+            <a href="https://github.com/VeadeshD/dingleLine" target="_blank" class="btn btn-primary" style="margin-top: 2rem; display: inline-block;">View Source Code on GitHub</a>
+        </div>
+    </div>
+
+    <!-- Prism JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-verilog.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    
+    <!-- Mermaid JS -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#050505',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#7000ff',
+                lineColor: '#00f0ff',
+                secondaryColor: '#111'
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veadesh Dhanasekar | Hardware & Systems Engineer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow"></div>
+    <div class="bg-glow right"></div>
+
+    <nav>
+        <div class="logo">VD.</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero" id="home">
+        <span class="hero-subtitle">Class of 2029 | Purdue University</span>
+        <h1>I'm Veadesh,<br><span class="gradient-text">a Hardware Engineer.</span></h1>
+        <p>As an incoming sophomore at Purdue, I've made it a goal to identify and solve physical problems by integrating my experience in FPGA's and PCB design.  Here are some of my works below:</p>
+        <div class="btn-group">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="https://github.com/VeadeshD/dingleLine" target="_blank" class="btn btn-secondary">GitHub</a>
+        </div>
+    </header>
+
+    <section id="about" class="hidden">
+        <h2 class="section-title">About Me</h2>
+        <div class="timeline-content">
+            <p>My engineering experience spans the full hardware lifecycle: from writing deterministic SystemVerilog RTL and synthesizing FPGA architectures, to designing custom PCBs in KiCAD and executing physical SMT/THT manufacturing on the factory floor.</p>
+            <br>
+            <p>Most recently, I architected an open-source Full Authority Digital Engine Control (FADEC) system on a Lattice iCE40 FPGA, utilizing hardware-accelerated SystemVerilog to regulate electric propulsion at nanosecond speeds. Beyond the technical logic, I prioritize cultivating strong, open-minded relationships with my teammates, as I believe the best engineering solutions come from fresh, collaborative perspectives.</p>
+            <br>
+            <div class="tags">
+                <span class="tag">SystemVerilog</span>
+                <span class="tag">FPGA</span>
+                <span class="tag">KiCAD</span>
+                <span class="tag">C / C++</span>
+                <span class="tag">MATLAB</span>
+                <span class="tag">SMT/THT Manufacturing</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title hidden">Featured Projects</h2>
+        <div class="projects-grid">
+            <!-- FADEC Project -->
+            <div class="project-card hidden">
+                <!-- Using the real photo -->
+                <div class="project-img" style="background-image: url('fadec_plot.jpg');"></div>
+                <div class="project-content">
+                    <h3 class="project-title">Open-Source FADEC (FPGA)</h3>
+                    <p class="project-desc">A hardware-accelerated, closed-loop engine control system synthesized on a Lattice iCE40 FPGA, capable of nanosecond reaction times.</p>
+                    <div class="tags">
+                        <span class="tag">SystemVerilog</span>
+                        <span class="tag">Lattice FPGA</span>
+                        <span class="tag">DSP</span>
+                    </div>
+                    <a href="fadec.html" class="btn btn-secondary" style="margin-top: 1.5rem; display: inline-block; padding: 0.5rem 1.5rem; border-radius: 20px;">Read Case Study</a>
+                </div>
+            </div>
+
+            <!-- Battleship Project -->
+            <div class="project-card hidden">
+                <!-- Using the real photo -->
+                <div class="project-img" style="background-image: url('battleship.jpg');"></div>
+                <div class="project-content">
+                    <h3 class="project-title">Battleship Simulation & Custom PCB</h3>
+                    <p class="project-desc">A full hardware lifecycle project featuring an iCE40 FPGA game state simulation and a custom-routed KiCAD PCB.</p>
+                    <div class="tags">
+                        <span class="tag">KiCAD</span>
+                        <span class="tag">PCB Design</span>
+                        <span class="tag">SystemVerilog</span>
+                    </div>
+                    <a href="battleship.html" class="btn btn-secondary" style="margin-top: 1.5rem; display: inline-block; padding: 0.5rem 1.5rem; border-radius: 20px;">Read Case Study</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2 class="section-title hidden">Experience</h2>
+        <div class="timeline">
+            <!-- SoCet -->
+            <div class="timeline-item hidden">
+                <div class="timeline-date">August 2025 - Present</div>
+                <div class="timeline-content">
+                    <h3>Hardware Design Engineer</h3>
+                    <h4>SoCet (System-on-Chip Extension Technologies)</h4>
+                    <p>Engineered the overall SystemVerilog structure for a custom PCB, developing and integrating multiple functional modules. Managed the full hardware lifecycle from initial schematics through hardware validation.</p>
+                </div>
+            </div>
+            
+            <!-- PURPL -->
+            <div class="timeline-item hidden">
+                <div class="timeline-date">August 2025 - Present</div>
+                <div class="timeline-content">
+                    <h3>Electrical Propulsion Team Member</h3>
+                    <h4>PURPL (Purdue Space Program)</h4>
+                    <p>Utilized Fusion 360 to design and synthesize magnetic components for a Grid Ion Thruster, collaborating with mechanical and electrical teams to optimize propulsion metrics.</p>
+                </div>
+            </div>
+
+            <!-- MNT Electronics -->
+            <div class="timeline-item hidden">
+                <div class="timeline-date">July 2026 - July 2026</div>
+                <div class="timeline-content">
+                    <h3>Manufacturing Extern</h3>
+                    <h4>MNT Electronics</h4>
+                    <p>Gained hands-on exposure to Surface Mount Technology (SMT) and Through-Hole Technology (THT) manufacturing processes and PCB assembly. Trained in Electrostatic Discharge (ESD) control measures.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="hidden">
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="timeline-content" style="text-align: center;">
+            <p style="margin-bottom: 2rem;">Actively seeking Avionics, Hardware, or Systems Engineering internships for Summer 2027.</p>
+            <div class="btn-group" style="justify-content: center;">
+                <a href="https://www.linkedin.com/in/veadesh-dhanasekar/" target="_blank" class="btn btn-primary">LinkedIn</a>
+                <a href="mailto:your.email@purdue.edu" class="btn btn-secondary">Email Me</a>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
