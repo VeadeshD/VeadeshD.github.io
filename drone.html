@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heavy-Lift Drone Case Study | Veadesh Dhanasekar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow"></div>
+    <nav>
+        <div class="logo">VD.</div>
+        <ul class="nav-links">
+            <li><a href="index.html">← Back to Portfolio</a></li>
+        </ul>
+    </nav>
+
+    <header class="case-study-hero">
+        <div>
+            <h1>Heavy-Lift Carbon Fiber Drone <br><span class="gradient-text">& Payload Release Mechanism</span></h1>
+            <p style="color: var(--text-secondary); max-width: 600px; margin: 1rem auto; font-size: 1.2rem;">A robust, custom-engineered quadcopter frame capable of delivering a 1kg payload, validated via FEA simulations.</p>
+        </div>
+    </header>
+
+    <div class="content-body">
+        <img src="drone.png" alt="Drone FEA Simulation in Fusion 360" class="hero-img">
+
+        <div class="split-layout">
+            <div class="split-text">
+                <h2>Custom CNC Frame Design</h2>
+                <p>Designed from the ground up in Fusion 360, the primary frame utilizes a unibody CNC carbon fiber construction with a 440mm wheelbase, engineered specifically to support 7-inch propellers for heavy lift capabilities.</p>
+                <p>The architecture tightly integrates standard hardware patterns, supporting a 30.5x30.5mm FC/ESC stack and 16x16mm / 19x19mm M3 motor mounts to ensure seamless compatibility with industry-standard propulsion systems.</p>
+            </div>
+            <div class="split-visual glass-panel">
+                <div class="mermaid">
+                    graph TD
+                        Servo[MG996R Servo] -->|Actuates| Latch[Custom Latch Arm]
+                        Latch -->|Releases| Doors[Carbon Fiber Doors]
+                        Doors -->|Pivots On| Hinges[3D-Printed Piano Hinges]
+                        Hinges -->|Bolted via M3| Frame[Main Unibody Frame]
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-panel" style="margin-top: 4rem;">
+            <h2>Payload Mechanism & FEA Validation</h2>
+            <p>The core objective was to engineer a reliable drop mechanism for a 1kg medical kit (150x100x50mm). This was achieved by designing custom bomb-bay style doors integrated directly into the unibody frame. The doors pivot on tightly-toleranced, 3D-printed interlocking piano hinges and are secured by a sweeping deadbolt actuated by an MG996R servo.</p>
+            <p>To guarantee reliability before manufacturing, the entire assembly underwent rigorous Finite Element Analysis (FEA) in Fusion 360. The static load simulations demonstrated exceptional structural integrity, achieving a Minimum Safety Factor of <strong>85.443</strong> under a 10N static load—proving the mechanism is fundamentally bomb-proof.</p>
+            
+            <h2 style="margin-top: 3rem;">Next Steps: Manufacturing</h2>
+            <p>With Phase 1 (CAD and Simulation) fully completed, the designs have been exported for physical production. The custom hinges and brackets are queued for 3D printing, and the flat 2D profiles have been generated as DXF files for precise CNC routing of the carbon fiber plates.</p>
+        </div>
+    </div>
+
+    <!-- Mermaid JS -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#050505',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#00f0ff',
+                lineColor: '#7000ff',
+                secondaryColor: '#111'
+            }
+        });
+    </script>
+</body>
+</html>
