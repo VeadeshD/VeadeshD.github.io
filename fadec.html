@@ -74,8 +74,21 @@ end</code></pre>
         <div class="glass-panel" style="margin-top: 4rem; text-align: center;">
             <h2>SystemVerilog FSM Architecture</h2>
             <p>The core logic of the FADEC is built around a complex Finite State Machine (FSM) that dictates engine states (Standby, Ignition, Steady-State, Shutdown). I engineered a custom SPI Master module in Verilog to constantly poll the external ADC chips, feeding the raw data through the DSP filter and directly into the combinational logic of the FSM.</p>
-            
-            <a href="https://github.com/VeadeshD/dingleLine" target="_blank" class="btn btn-primary" style="margin-top: 2rem; display: inline-block;">View Source Code on GitHub</a>
+        </div>
+
+        <div class="split-layout">
+            <div class="split-text">
+                <h2>Physical Hardware Integration & Bug Squashing</h2>
+                <p>The crowning achievement of this project was migrating the simulation into the real physical world. I integrated a <strong>Lattice iCE40 FPGA</strong>, an <strong>MCP3208 12-bit ADC</strong>, and a <strong>Raspberry Pi Pico Ground Station</strong>.</p>
+                <p>During integration, I had to squash two massive hardware bugs. First, an SPI Timing Glitch where the ADC data was mangled due to shifting on both edges of the clock. I rewrote the FSM to strictly adhere to the SPI protocol (transmitting on the falling edge, sampling on the rising edge). Second, a UART Synchronization Glitch where the Pico read garbage bytes on FPGA boot. I solved this by writing a bulletproof mathematical synchronization filter in C.</p>
+                <p>The final system successfully reads live analog voltages over physical SPI pins, processes them through the DSP pipeline, and streams custom telemetry packets to the Pico at 115200 baud, perfectly mirroring physical LEDs to the FADEC states (Fuel Valve PWM, Alarm, Shutdown)!</p>
+                <a href="https://github.com/VeadeshD/dingleLine" target="_blank" class="btn btn-primary" style="margin-top: 2rem; display: inline-block;">View Source Code on GitHub</a>
+            </div>
+            <div class="split-visual glass-panel" style="display: flex; justify-content: center; align-items: center; padding: 1rem;">
+                <!-- PLACEHOLDER FOR FINAL PHOTO -->
+                <img src="final_breadboard.jpg" alt="Final Breadboard Hardware Integration" style="max-width: 100%; border-radius: 8px;">
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem; text-align: center;">Final hardware integration: Lattice FPGA, ADC, LEDs, and Pico Ground Station.</p>
+            </div>
         </div>
     </div>
 
