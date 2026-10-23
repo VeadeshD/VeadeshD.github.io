@@ -49,7 +49,7 @@
             
             <div class="glass-panel" style="margin-top: 4rem; margin-bottom: 2rem;">
                 <h2>The Big Picture: Project Roadmap</h2>
-                <p>While Phase 1 focused heavily on structural engineering and FEA validation, the ultimate vision for this project is a fully autonomous, heavy-lift delivery system capable of navigating complex environments to drop medical supplies.</p>
+                <p>What started as a structural engineering challenge has now evolved into a fully-integrated multidisciplinary system. The digital foundation for the mechanical, electrical, and software phases is completely finished!</p>
                 
                 <div class="timeline" style="margin-top: 2rem;">
                     <div class="timeline-item">
@@ -61,25 +61,61 @@
                     </div>
                     
                     <div class="timeline-item">
-                        <div class="timeline-date">Phase 2: Upcoming</div>
+                        <div class="timeline-date">Phase 2: Complete</div>
                         <div class="timeline-content">
-                            <h3>Physical Bring-Up & Propulsion</h3>
-                            <p>CNC manufacturing of the frame, 3D printing of the hinges, and the integration/soldering of the Flight Controller, ESC stack, and 7-inch propulsion system.</p>
+                            <h3>Custom Flight Controller (PCB Design)</h3>
+                            <p>Engineered an STM32-based custom flight controller PCB in KiCad, integrating an MPU-6000 IMU, MP1584EN buck converter, and JST headers. Verified through 3D mechanical interference checks.</p>
                         </div>
                     </div>
                     
                     <div class="timeline-item">
-                        <div class="timeline-date">Phase 3: Future Vision</div>
+                        <div class="timeline-date">Phase 3: Complete</div>
                         <div class="timeline-content">
-                            <h3>Autonomy & Sensor Fusion</h3>
-                            <p>Integration of a companion computer (e.g., Raspberry Pi/Jetson) and LiDAR to enable autonomous waypoint navigation, obstacle avoidance, and precise, automated payload drops without manual pilot intervention.</p>
+                            <h3>Software Simulation & Telemetry Stack</h3>
+                            <p>Developed a full-stack emergency dispatch system leveraging ArduCopter SITL, a Flask API, and a mobile web dashboard for live GPS waypoint navigation and terminal guidance.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Phase 4: Upcoming</div>
+                        <div class="timeline-content">
+                            <h3>Manufacturing & Physical Integration</h3>
+                            <p>Ordering the PCB from a fab house, CNC cutting the frame, and soldering the final hardware to flash the STM32 for real-world PID tuning.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <h2 style="margin-top: 3rem;">Next Steps: Manufacturing</h2>
-            <p>With Phase 1 (CAD and Simulation) fully completed, the designs have been exported for physical production. The custom hinges and brackets are queued for 3D printing, and the flat 2D profiles have been generated as DXF files for precise CNC routing of the carbon fiber plates.</p>
+            <div class="split-layout" style="margin-top: 4rem;">
+                <div class="split-text">
+                    <h2>Electrical Engineering: Custom Flight Controller</h2>
+                    <p>Instead of relying on an off-the-shelf commercial flight controller, I designed a custom PCB from scratch using KiCad. The board is powered by an STM32 microcontroller and features a high-efficiency MP1584EN buck converter to step down raw LiPo voltage, alongside an MPU-6000 IMU for rock-solid flight stabilization.</p>
+                    <p>After routing the 4-layer board and passing DRC, the 3D model was exported as a STEP file and dropped back into the Fusion 360 mechanical assembly. This workflow allowed me to design a custom snap-fit plastic sled to mount the PCB without needing dedicated screw holes, ensuring a perfect mechanical fit before ever ordering the physical board.</p>
+                </div>
+                <div class="split-visual glass-panel">
+                    <div class="mermaid">
+                        graph TD
+                            Battery[LiPo Battery] --> TP1[High-Current Pads]
+                            TP1 --> Buck[MP1584EN Buck Converter]
+                            Buck -->|5V Step Down| STM[STM32 Microcontroller]
+                            STM <-->|SPI/I2C| IMU[MPU-6000 Gyro/Accel]
+                            STM --> ESC[Motor Outputs]
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel" style="margin-top: 4rem;">
+                <h2>Software Engineering: Full-Stack Simulation & Terminal Guidance</h2>
+                <p>To safely test the autonomous delivery sequence before risking hardware, I built a robust software pipeline utilizing <strong>ArduCopter SITL (Software In The Loop)</strong>. The system consists of three massive components:</p>
+                <ul style="color: var(--text-secondary); line-height: 1.8; margin-left: 1.5rem; margin-top: 1rem;">
+                    <li><strong>Mobile Dispatch API:</strong> A Flask server that accepts real-world GPS coordinates from a user's phone via an emergency SOS button, instantly spawning a virtual drone mission in the background.</li>
+                    <li><strong>Mission Control Dashboard:</strong> A sleek web UI that constantly polls the drone's telemetry JSON data at 4Hz to display live updates on altitude, flight phase, and battery drain.</li>
+                    <li><strong>Terminal Guidance:</strong> Once the drone reaches the GPS waypoint, a Python script fires up a live camera feed. Using OpenCV and HSV color space masking, the code tracks an orange landing pad and translates the bounding box into closed-loop velocity vectors, allowing the drone to physically strafe and lock-on for a pinpoint delivery in GPS-denied environments.</li>
+                </ul>
+            </div>
+
+            <h2 style="margin-top: 4rem;">Next Steps: Manufacturing</h2>
+            <p>With the digital trinity (CAD, PCB Layout, and Software Simulation) completely finished, the project is officially ready for physical manufacturing. Gerber files have been exported for PCB fabrication, the custom frame is queued for CNC routing, and the custom 3D printed sled is ready for integration.</p>
         </div>
     </div>
 
