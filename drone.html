@@ -104,6 +104,20 @@
                 </div>
             </div>
 
+            <!-- Flight Controller Visuals -->
+            <div class="split-layout" style="margin-top: 2rem;">
+                <div class="split-text glass-panel" style="text-align: center;">
+                    <img src="fc_3d_render.png" alt="Custom Flight Controller 3D Model" style="width: 100%; border-radius: 12px; border: 1px solid var(--glass-border); margin-bottom: 1rem;">
+                    <h4 style="color: var(--accent-primary);">3D Component Render</h4>
+                    <p style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 0.5rem;">Rendered in KiCad 3D viewer showing outwards-facing JST connectors, high-current LiPo power pads (TP1/TP2), STM32 MCU, and IMU decoupling capacitors.</p>
+                </div>
+                <div class="split-visual glass-panel" style="text-align: center;">
+                    <img src="fc_layout.png" alt="Custom Flight Controller KiCad PCB Layout" style="width: 100%; border-radius: 12px; border: 1px solid var(--glass-border); margin-bottom: 1rem;">
+                    <h4 style="color: var(--accent-secondary);">KiCad PCB Routing & Plane Layer</h4>
+                    <p style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 0.5rem;">Routed multi-layer board highlighting the high-current VBAT power polygon pours, clean signal breakaways for SPI/I2C buses, and optimized ground return paths.</p>
+                </div>
+            </div>
+
             <div class="glass-panel" style="margin-top: 4rem;">
                 <h2>Software Engineering: Full-Stack Simulation & Terminal Guidance</h2>
                 <p>To safely test the autonomous delivery sequence before risking hardware, I built a robust software pipeline utilizing <strong>ArduCopter SITL (Software In The Loop)</strong>. The system consists of three massive components:</p>
